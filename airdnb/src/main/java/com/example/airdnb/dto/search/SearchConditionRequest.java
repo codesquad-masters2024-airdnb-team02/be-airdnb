@@ -2,9 +2,10 @@ package com.example.airdnb.dto.search;
 
 import com.example.airdnb.domain.search.PriceRange;
 import com.example.airdnb.domain.search.SearchCondition;
-import com.example.airdnb.domain.search.SearchCondition.SearchConditionBuilder;
 import com.example.airdnb.domain.search.StayPeriod;
+import lombok.ToString;
 
+@ToString
 public class SearchConditionRequest {
     private final StayPeriod stayPeriod;
     private final PriceRange priceRange;
@@ -17,18 +18,9 @@ public class SearchConditionRequest {
     }
 
     public SearchCondition toEntity() {
-        SearchConditionBuilder builder = SearchCondition.builder();
-
-        if (this.stayPeriod != null) {
-            builder.stayPeriod(this.stayPeriod);
-        }
-        if (this.priceRange != null) {
-            builder.priceRange(this.priceRange);
-        }
-        if (this.guestCount != null) {
-            builder.guestCount(this.guestCount);
-        }
-
-        return builder.build();
+        return new SearchCondition(
+                this.stayPeriod,
+                this.priceRange,
+                this.guestCount);
     }
 }
