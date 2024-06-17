@@ -6,17 +6,15 @@ import lombok.ToString;
 @ToString
 @Getter
 public class PriceRange {
+    private final Long minPrice;
+    private final Long maxPrice;
 
-    private final Double minPrice;
-
-    private final Double maxPrice;
-
-    private PriceRange(Double minPrice, Double maxPrice) {
+    private PriceRange(Long minPrice, Long maxPrice) {
         this.minPrice = minPrice;
         this.maxPrice = maxPrice;
     }
 
-    public static PriceRange of(Double minPrice, Double maxPrice) {
+    public static PriceRange of(Long minPrice, Long maxPrice) {
         return new PriceRange(minPrice, maxPrice);
     }
 }
