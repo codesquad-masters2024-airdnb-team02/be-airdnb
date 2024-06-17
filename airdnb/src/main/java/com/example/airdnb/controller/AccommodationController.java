@@ -9,6 +9,7 @@ import com.example.airdnb.dto.review.ReviewResponse;
 import com.example.airdnb.service.AccommodationService;
 import com.example.airdnb.service.ReviewService;
 import jakarta.validation.Valid;
+import java.net.URI;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -39,8 +40,8 @@ public class AccommodationController {
     @PostMapping
     public ResponseEntity<String> createNewAccommodation(@RequestBody AccommodationCreationRequest request) {
         log.info(request.toString());
-        Accommodation newAccommodation = accommodationService.createNewAccommodation(request);
-        return ResponseEntity.ok(String.format("SUCCESS!! NAME : %s", newAccommodation.getName()));
+        Accommodation createdAccommodation = accommodationService.createNewAccommodation(request);
+        return ResponseEntity.created(URI.create("/accommodations/" + createdAccommodation.getId())).build();
     }
 
     @PostMapping("/{accommodationId}/reviews")
