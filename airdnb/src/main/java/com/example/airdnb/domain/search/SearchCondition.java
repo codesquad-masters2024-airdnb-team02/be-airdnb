@@ -11,9 +11,6 @@ package com.example.airdnb.domain.search;
 public record SearchCondition(StayPeriod stayPeriod, PriceRange priceRange, Integer guestCount) {
 
     public SearchCondition {
-        if (priceRange == null) {
-            priceRange = PriceRange.defaultPriceRange();
-        }
         if (guestCount == null) {
             guestCount = 1;
         }

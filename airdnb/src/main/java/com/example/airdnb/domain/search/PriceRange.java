@@ -1,6 +1,5 @@
 package com.example.airdnb.domain.search;
 
-import java.util.Optional;
 import lombok.Getter;
 import lombok.ToString;
 
@@ -13,15 +12,11 @@ public class PriceRange {
     private final Long maxPrice;
 
     private PriceRange(Long minPrice, Long maxPrice) {
-        this.minPrice = Optional.ofNullable(minPrice).orElse(DEFAULT_MIN_VALUE);
-        this.maxPrice = Optional.ofNullable(maxPrice).orElse(DEFAULT_MAX_VALUE);
+        this.minPrice = (minPrice != null) ? minPrice : DEFAULT_MIN_VALUE;
+        this.maxPrice = (maxPrice != null) ? maxPrice : DEFAULT_MAX_VALUE;
     }
 
     public static PriceRange of(Long minPrice, Long maxPrice) {
         return new PriceRange(minPrice, maxPrice);
-    }
-
-    public static PriceRange defaultPriceRange() {
-        return new PriceRange(DEFAULT_MIN_VALUE, DEFAULT_MAX_VALUE);
     }
 }
