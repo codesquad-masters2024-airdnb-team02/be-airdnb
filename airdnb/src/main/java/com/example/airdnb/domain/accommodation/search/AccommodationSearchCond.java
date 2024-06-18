@@ -1,4 +1,4 @@
-package com.example.airdnb.domain.search;
+package com.example.airdnb.domain.accommodation.search;
 
 
 /**
@@ -8,9 +8,9 @@ package com.example.airdnb.domain.search;
  * @param priceRange Nullable
  * @param guestCount Nullable
  */
-public record SearchCondition(StayPeriod stayPeriod, PriceRange priceRange, Integer guestCount) {
+public record AccommodationSearchCond(StayPeriod stayPeriod, PriceRange priceRange, Integer guestCount) {
 
-    public SearchCondition {
+    public AccommodationSearchCond {
         if (guestCount == null) {
             guestCount = 1;
         }

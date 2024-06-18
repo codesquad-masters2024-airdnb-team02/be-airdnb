@@ -3,9 +3,9 @@ package com.example.airdnb.repository;
 import com.example.airdnb.domain.accommodation.Accommodation;
 import com.example.airdnb.domain.accommodation.QAccommodation;
 import com.example.airdnb.domain.booking.QBooking;
-import com.example.airdnb.domain.search.PriceRange;
-import com.example.airdnb.domain.search.SearchCondition;
-import com.example.airdnb.domain.search.StayPeriod;
+import com.example.airdnb.domain.accommodation.search.PriceRange;
+import com.example.airdnb.domain.accommodation.search.AccommodationSearchCond;
+import com.example.airdnb.domain.accommodation.search.StayPeriod;
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import jakarta.persistence.EntityManager;
@@ -20,14 +20,14 @@ public class AccommodationRepositoryCustomImpl implements AccommodationRepositor
     }
 
     @Override
-    public List<Accommodation> search(SearchCondition searchCondition) {
+    public List<Accommodation> search(AccommodationSearchCond accommodationSearchCond) {
         QAccommodation accommodation = QAccommodation.accommodation;
         QBooking booking = QBooking.booking;
         BooleanBuilder whereClause = new BooleanBuilder();
 
-        addGuestCountCondition(whereClause, searchCondition.guestCount());
-        addPriceRangeCondition(whereClause, searchCondition.priceRange());
-        addStayPeriodCondition(whereClause, searchCondition.stayPeriod(), accommodation, booking);
+        addGuestCountCondition(whereClause, accommodationSearchCond.guestCount());
+        addPriceRangeCondition(whereClause, accommodationSearchCond.priceRange());
+        addStayPeriodCondition(whereClause, accommodationSearchCond.stayPeriod(), accommodation, booking);
 
         return queryFactory.selectFrom(accommodation)
                 .where(whereClause)

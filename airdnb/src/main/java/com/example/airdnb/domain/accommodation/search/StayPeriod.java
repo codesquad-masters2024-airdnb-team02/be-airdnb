@@ -1,4 +1,4 @@
-package com.example.airdnb.domain.search;
+package com.example.airdnb.domain.accommodation.search;
 
 import java.time.LocalDate;
 import lombok.Getter;

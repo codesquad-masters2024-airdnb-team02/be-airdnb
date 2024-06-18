@@ -1,4 +1,4 @@
-package com.example.airdnb.domain.search;
+package com.example.airdnb.domain.accommodation.search;
 
 import lombok.Getter;
 import lombok.ToString;

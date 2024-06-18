@@ -1,21 +1,21 @@
 package com.example.airdnb.dto.search;
 
-import com.example.airdnb.domain.search.PriceRange;
-import com.example.airdnb.domain.search.SearchCondition;
-import com.example.airdnb.domain.search.StayPeriod;
+import com.example.airdnb.domain.accommodation.search.PriceRange;
+import com.example.airdnb.domain.accommodation.search.AccommodationSearchCond;
+import com.example.airdnb.domain.accommodation.search.StayPeriod;
 import jakarta.validation.constraints.NotNull;
 import java.time.LocalDate;
 import lombok.ToString;
 
 @ToString
-public class SearchConditionRequest {
+public class AccommodationSearchCondRequest {
 
     @NotNull
     private final StayPeriod stayPeriod;
     private final PriceRange priceRange;
     private final Integer guestCount;
 
-    public SearchConditionRequest(
+    public AccommodationSearchCondRequest(
             LocalDate checkInDate,
             LocalDate checkOutDate,
             Long minPrice,
@@ -26,8 +26,8 @@ public class SearchConditionRequest {
         this.guestCount = guestCount;
     }
 
-    public SearchCondition toEntity() {
-        return new SearchCondition(
+    public AccommodationSearchCond toEntity() {
+        return new AccommodationSearchCond(
                 this.stayPeriod,
                 this.priceRange,
                 this.guestCount);
