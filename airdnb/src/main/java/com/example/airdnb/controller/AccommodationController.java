@@ -4,6 +4,7 @@ import com.example.airdnb.domain.accommodation.Accommodation;
 import com.example.airdnb.domain.accommodation.search.AccommodationSearchCond;
 import com.example.airdnb.domain.user.UserDetail;
 import com.example.airdnb.dto.accommodation.AccommodationCreationRequest;
+import com.example.airdnb.dto.accommodation.search.AccommodationResponse;
 import com.example.airdnb.dto.review.ReviewCreateRequest;
 import com.example.airdnb.dto.review.ReviewResponse;
 import com.example.airdnb.dto.accommodation.search.AccommodationSearchCondRequest;
@@ -35,7 +36,7 @@ public class AccommodationController {
     private final ReviewService reviewService;
 
     @GetMapping
-    public List<Accommodation> search(@ModelAttribute @Valid AccommodationSearchCondRequest accommodationSearchCondRequest) {
+    public List<AccommodationResponse> search(@ModelAttribute @Valid AccommodationSearchCondRequest accommodationSearchCondRequest) {
 
         AccommodationSearchCond accommodationSearchCond = accommodationSearchCondRequest.toEntity();
         log.info(accommodationSearchCond.toString());
