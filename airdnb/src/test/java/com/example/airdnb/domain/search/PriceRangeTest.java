@@ -4,7 +4,7 @@ import static org.assertj.core.api.Assertions.*;
 
 import com.example.airdnb.domain.accommodation.search.PriceRange;
 import com.example.airdnb.domain.accommodation.search.AccommodationSearchCond;
-import com.example.airdnb.dto.search.AccommodationSearchCondRequest;
+import com.example.airdnb.dto.accommodation.search.AccommodationSearchCondRequest;
 import java.time.LocalDate;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

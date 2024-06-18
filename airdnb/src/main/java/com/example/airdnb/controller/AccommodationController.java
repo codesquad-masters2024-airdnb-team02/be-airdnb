@@ -6,7 +6,7 @@ import com.example.airdnb.domain.user.UserDetail;
 import com.example.airdnb.dto.accommodation.AccommodationCreationRequest;
 import com.example.airdnb.dto.review.ReviewCreateRequest;
 import com.example.airdnb.dto.review.ReviewResponse;
-import com.example.airdnb.dto.search.AccommodationSearchCondRequest;
+import com.example.airdnb.dto.accommodation.search.AccommodationSearchCondRequest;
 import com.example.airdnb.service.AccommodationService;
 import com.example.airdnb.service.ReviewService;
 import jakarta.validation.Valid;

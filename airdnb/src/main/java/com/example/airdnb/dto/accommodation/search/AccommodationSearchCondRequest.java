@@ -1,4 +1,4 @@
-package com.example.airdnb.dto.search;
+package com.example.airdnb.dto.accommodation.search;
 
 import com.example.airdnb.domain.accommodation.search.PriceRange;
 import com.example.airdnb.domain.accommodation.search.AccommodationSearchCond;
