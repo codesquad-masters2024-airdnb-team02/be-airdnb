@@ -4,6 +4,7 @@ import com.example.airdnb.domain.accommodation.search.PriceRange;
 import com.example.airdnb.domain.accommodation.search.AccommodationSearchCond;
 import com.example.airdnb.domain.accommodation.search.StayPeriod;
 import jakarta.validation.constraints.NotNull;
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import lombok.ToString;
 
@@ -18,8 +19,8 @@ public class AccommodationSearchCondRequest {
     public AccommodationSearchCondRequest(
             LocalDate checkInDate,
             LocalDate checkOutDate,
-            Long minPrice,
-            Long maxPrice,
+            BigDecimal minPrice,
+            BigDecimal maxPrice,
             Integer guestCount) {
         this.stayPeriod = StayPeriod.of(checkInDate, checkOutDate);
         this.priceRange = PriceRange.of(minPrice, maxPrice);
