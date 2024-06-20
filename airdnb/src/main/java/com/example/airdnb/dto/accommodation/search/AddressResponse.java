@@ -1,4 +1,4 @@
-package com.example.airdnb.dto.accommodation;
+package com.example.airdnb.dto.accommodation.search;
 
 import com.example.airdnb.domain.accommodation.Address;
 import lombok.Getter;
