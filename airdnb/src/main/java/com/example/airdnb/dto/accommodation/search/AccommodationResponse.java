@@ -1,7 +1,6 @@
 package com.example.airdnb.dto.accommodation.search;
 
 import com.example.airdnb.domain.accommodation.Accommodation;
-import com.example.airdnb.dto.accommodation.AddressResponse;
 
 /**
  *

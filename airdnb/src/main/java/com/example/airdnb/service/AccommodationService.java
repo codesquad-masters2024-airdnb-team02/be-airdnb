@@ -4,11 +4,10 @@ import com.example.airdnb.domain.accommodation.Accommodation;
 import com.example.airdnb.domain.accommodation.search.AccommodationSearchCond;
 import com.example.airdnb.domain.review.Review;
 import com.example.airdnb.domain.user.User;
-import com.example.airdnb.domain.user.Role;
+import com.example.airdnb.domain.user.User.Role;
 import com.example.airdnb.dto.accommodation.AccommodationCreationRequest;
 import com.example.airdnb.dto.accommodation.search.AccommodationResponse;
 import com.example.airdnb.dto.accommodation.search.ReviewSummaryResponse;
-import com.example.airdnb.exception.UserNotFoundException;
 import com.example.airdnb.repository.AccommodationRepository;
 import com.example.airdnb.repository.ReviewRepository;
 import com.example.airdnb.repository.UserRepository;
@@ -51,7 +50,7 @@ public class AccommodationService {
 
     private User findUserById(Long id) {
         return userRepository.findById(id)
-                .orElseThrow(() -> new UserNotFoundException(id));
+                .orElseThrow(RuntimeException::new);
     }
 
     private ReviewSummaryResponse createReviewSummaryOfAccommodation(Long accommodationId) {
