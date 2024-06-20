@@ -1,6 +1,7 @@
 package com.example.airdnb.dto.accommodation.search;
 
 import com.example.airdnb.domain.accommodation.Accommodation;
+import com.example.airdnb.dto.accommodation.AddressResponse;
 
 /**
  *
@@ -16,7 +17,7 @@ import com.example.airdnb.domain.accommodation.Accommodation;
 public record AccommodationResponse(
         Long id,
         String name,
-        String address,
+        AddressResponse address,
         String representativeImageUrl,
         Long pricePerNight,
         Integer maxGuests) {
@@ -24,13 +25,12 @@ public record AccommodationResponse(
     public static AccommodationResponse of(Accommodation accommodation) {
 
         String imageUrl = accommodation.getRepresentativeImage().getUrl();
-        String address = accommodation.getAddress().getState();
-
+        AddressResponse addressResponse = AddressResponse.from(accommodation.getAddress());
 
         return new AccommodationResponse(
                 accommodation.getId(),
                 accommodation.getName(),
-                address,
+                addressResponse,
                 imageUrl,
                 accommodation.getPricePerNight(),
                 accommodation.getMaxGuests()
