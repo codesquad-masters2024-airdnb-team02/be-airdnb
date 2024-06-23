@@ -1,5 +1,6 @@
 package com.example.airdnb.config;
 
+import com.example.airdnb.config.oauth.CustomAuthenticationEntryPoint;
 import com.example.airdnb.config.oauth.CustomOAuth2UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -26,6 +27,7 @@ public class SecurityConfig {
     private final CustomOAuth2UserService customOAuth2UserService;
     private final CustomAuthenticationSuccessHandler customAuthenticationSuccessHandler;
     private final TokenAuthenticationFilter tokenAuthenticationFilter;
+    private final CustomAuthenticationEntryPoint customAuthenticationEntryPoint;
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -49,7 +51,10 @@ public class SecurityConfig {
                     .userInfoEndpoint(userInfoEndpointConfig ->
                         userInfoEndpointConfig.userService(customOAuth2UserService))
                     .successHandler(customAuthenticationSuccessHandler)
-            );
+            )
+            .exceptionHandling(
+                httpSecurityExceptionHandlingConfigurer -> httpSecurityExceptionHandlingConfigurer.authenticationEntryPoint(
+                    customAuthenticationEntryPoint));
 
         return http.build();
     }
