@@ -7,6 +7,7 @@ import com.example.airdnb.domain.user.User;
 import com.example.airdnb.domain.user.User.Role;
 import com.example.airdnb.dto.accommodation.AccommodationCreationRequest;
 import com.example.airdnb.dto.accommodation.search.AccommodationResponse;
+import com.example.airdnb.dto.accommodation.search.AccommodationSearchCondRequest;
 import com.example.airdnb.dto.accommodation.search.ReviewSummaryResponse;
 import com.example.airdnb.exception.UserNotFoundException;
 import com.example.airdnb.repository.AccommodationRepository;
@@ -25,7 +26,8 @@ public class AccommodationService {
     private final UserRepository userRepository;
     private final ReviewRepository reviewRepository;
 
-    public List<AccommodationResponse> searchWithCondition(AccommodationSearchCond searchCond) {
+    public List<AccommodationResponse> searchWithCondition(AccommodationSearchCondRequest searchCondRequest) {
+        AccommodationSearchCond searchCond = searchCondRequest.toEntity();
         List<Accommodation> accommodations = accommodationRepository.search(searchCond);
 
         return accommodations.stream()

@@ -1,7 +1,6 @@
 package com.example.airdnb.controller;
 
 import com.example.airdnb.domain.accommodation.Accommodation;
-import com.example.airdnb.domain.accommodation.search.AccommodationSearchCond;
 import com.example.airdnb.domain.user.UserDetail;
 import com.example.airdnb.dto.accommodation.AccommodationCreationRequest;
 import com.example.airdnb.dto.accommodation.search.AccommodationResponse;
@@ -38,9 +37,7 @@ public class AccommodationController {
     @GetMapping
     public List<AccommodationResponse> search(@ModelAttribute @Valid AccommodationSearchCondRequest accommodationSearchCondRequest) {
 
-        AccommodationSearchCond accommodationSearchCond = accommodationSearchCondRequest.toEntity();
-        log.info(accommodationSearchCond.toString());
-        return accommodationService.searchWithCondition(accommodationSearchCond);
+        return accommodationService.searchWithCondition(accommodationSearchCondRequest);
     }
 
     @PostMapping
