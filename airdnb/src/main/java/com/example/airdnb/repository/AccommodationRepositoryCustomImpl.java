@@ -10,6 +10,9 @@ import com.querydsl.core.BooleanBuilder;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import jakarta.persistence.EntityManager;
 import java.util.List;
+import org.locationtech.jts.geom.Coordinate;
+import org.locationtech.jts.geom.GeometryFactory;
+import org.locationtech.jts.geom.Point;
 
 public class AccommodationRepositoryCustomImpl implements AccommodationRepositoryCustom {
 
@@ -28,6 +31,7 @@ public class AccommodationRepositoryCustomImpl implements AccommodationRepositor
         addGuestCountCondition(whereClause, accommodationSearchCond.guestCount());
         addPriceRangeCondition(whereClause, accommodationSearchCond.priceRange());
         addStayPeriodCondition(whereClause, accommodationSearchCond.stayPeriod(), accommodation, booking);
+        addLocationCondition(whereClause, accommodationSearchCond.centralLocation());
 
         return queryFactory.selectFrom(accommodation)
                 .where(whereClause)
@@ -53,5 +57,22 @@ public class AccommodationRepositoryCustomImpl implements AccommodationRepositor
                         ).notExists()
         );
         whereClause.and(bookingClause);
+    }
+
+    private void addLocationCondition(BooleanBuilder whereClause, Point centralLocation) {
+        if (centralLocation != null) {
+            double radiusInMeters = 1000;
+            double radiusInDegrees = radiusInMeters / 111000.0;
+
+            double centralLat = centralLocation.getY();
+            double centralLon = centralLocation.getX();
+
+            GeometryFactory factory = new GeometryFactory();
+
+            Point minPoint = factory.createPoint(new Coordinate(centralLon - radiusInDegrees, centralLat - radiusInDegrees));
+            Point maxPoint = factory.createPoint(new Coordinate(centralLon + radiusInDegrees, centralLat + radiusInDegrees));
+
+            whereClause.and(QAccommodation.accommodation.address.location.between(minPoint, maxPoint));
+        }
     }
 }

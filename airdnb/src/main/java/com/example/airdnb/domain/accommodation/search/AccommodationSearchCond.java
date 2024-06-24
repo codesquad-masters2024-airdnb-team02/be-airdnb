@@ -1,6 +1,8 @@
 package com.example.airdnb.domain.accommodation.search;
 
 
+import org.locationtech.jts.geom.Point;
+
 /**
  * 검색 조건 요청
  *
@@ -8,7 +10,7 @@ package com.example.airdnb.domain.accommodation.search;
  * @param priceRange Nullable
  * @param guestCount Nullable
  */
-public record AccommodationSearchCond(StayPeriod stayPeriod, PriceRange priceRange, Integer guestCount) {
+public record AccommodationSearchCond(StayPeriod stayPeriod, PriceRange priceRange, Integer guestCount, Point centralLocation) {
 
     public AccommodationSearchCond {
         if (guestCount == null) {
