@@ -48,4 +48,8 @@ public class UserService {
         String token = tokenProvider.generateToken(user);
         return LoginResponse.from(user, token);
     }
+
+    public User findByEmail(String email) {
+        return userRepository.findByEmail(email).orElseThrow(NoSuchElementException::new);
+    }
 }

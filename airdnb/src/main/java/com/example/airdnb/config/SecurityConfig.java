@@ -1,5 +1,7 @@
 package com.example.airdnb.config;
 
+import com.example.airdnb.config.oauth.CustomAuthenticationEntryPoint;
+import com.example.airdnb.config.oauth.CustomOAuth2UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -22,12 +24,21 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @RequiredArgsConstructor
 public class SecurityConfig {
 
+    private final CustomOAuth2UserService customOAuth2UserService;
+    private final CustomAuthenticationSuccessHandler customAuthenticationSuccessHandler;
+    private final TokenAuthenticationFilter tokenAuthenticationFilter;
+    private final CustomAuthenticationEntryPoint customAuthenticationEntryPoint;
 
     @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http, TokenAuthenticationFilter tokenAuthenticationFilter) throws Exception {
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+
         http
             .csrf(AbstractHttpConfigurer::disable)
             .httpBasic(AbstractHttpConfigurer::disable)
+            .formLogin(AbstractHttpConfigurer::disable)
+            .logout(LogoutConfigurer::disable)
+            .headers(headers -> headers
+                .frameOptions(FrameOptionsConfig::sameOrigin))
             .authorizeHttpRequests(authorize -> authorize
                 .requestMatchers("/", "/login", "/users/**", "/h2-console/**").permitAll()
                 .anyRequest().authenticated()
@@ -35,12 +46,15 @@ public class SecurityConfig {
             .sessionManagement(session -> session
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
             .addFilterBefore(tokenAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
-            .formLogin(AbstractHttpConfigurer::disable
+            .oauth2Login(oauth2Login ->
+                oauth2Login
+                    .userInfoEndpoint(userInfoEndpointConfig ->
+                        userInfoEndpointConfig.userService(customOAuth2UserService))
+                    .successHandler(customAuthenticationSuccessHandler)
             )
-            .logout(LogoutConfigurer::permitAll
-            )
-            .headers(headers -> headers
-                .frameOptions(FrameOptionsConfig::sameOrigin));
+            .exceptionHandling(
+                httpSecurityExceptionHandlingConfigurer -> httpSecurityExceptionHandlingConfigurer.authenticationEntryPoint(
+                    customAuthenticationEntryPoint));
 
         return http.build();
     }
@@ -53,7 +67,6 @@ public class SecurityConfig {
     @Bean
     AuthenticationManager authenticationManager(
         AuthenticationConfiguration authenticationConfiguration) throws Exception {
-
         return authenticationConfiguration.getAuthenticationManager();
     }
 

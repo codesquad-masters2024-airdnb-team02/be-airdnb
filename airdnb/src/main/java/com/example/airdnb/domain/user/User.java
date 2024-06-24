@@ -37,7 +37,6 @@ public class User {
     @Column(nullable = false, unique = true)
     private String email;
 
-    @Column(nullable = false)
     private String password;
 
     @Column(nullable = false)
@@ -73,7 +72,12 @@ public class User {
         this.name = name;
     }
 
-    public enum Role {
-        HOST, GUEST, ADMIN
+    public String getKey() {
+        return role.getKey();
+    }
+
+    public User updateName(String name) {
+        this.name = name;
+        return this;
     }
 }

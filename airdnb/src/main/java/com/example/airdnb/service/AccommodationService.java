@@ -3,7 +3,7 @@ package com.example.airdnb.service;
 import com.example.airdnb.domain.accommodation.Accommodation;
 import com.example.airdnb.domain.accommodation.search.AccommodationSearchCond;
 import com.example.airdnb.domain.user.User;
-import com.example.airdnb.domain.user.User.Role;
+import com.example.airdnb.domain.user.Role;
 import com.example.airdnb.dto.accommodation.AccommodationCreationRequest;
 import com.example.airdnb.dto.accommodation.search.AccommodationResponse;
 import com.example.airdnb.repository.AccommodationRepository;

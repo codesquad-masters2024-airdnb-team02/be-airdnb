@@ -1,7 +1,7 @@
 package com.example.airdnb.dto.user;
 
 import com.example.airdnb.domain.user.User;
-import com.example.airdnb.domain.user.User.Role;
+import com.example.airdnb.domain.user.Role;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;

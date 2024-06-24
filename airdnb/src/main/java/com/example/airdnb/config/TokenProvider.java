@@ -45,7 +45,7 @@ public class TokenProvider {
             .expiration(new Date(new Date().getTime() + expirationTime))
             .subject(user.getEmail())
             .claim("id", user.getId())
-            .claim("role", user.getRole())
+            .claim("role", user.getKey())
             .signWith(key)
             .compact();
     }
@@ -58,7 +58,7 @@ public class TokenProvider {
                 .parseSignedClaims(token);
             log.debug("검증 성공");
             return true;
-        } catch (JwtException e) {
+        } catch (JwtException | IllegalArgumentException e) {
             log.debug("검증 실패");
             return false;
         }
@@ -84,7 +84,7 @@ public class TokenProvider {
             .build()
             .parseSignedClaims(token)
             .getPayload();
-        
+
     }
 
 }
