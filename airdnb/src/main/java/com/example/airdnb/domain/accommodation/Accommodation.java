@@ -49,6 +49,8 @@ public class Accommodation {
     @Column(nullable = false)
     private Integer maxGuests;
 
+    private List<Amenity> amenities;
+
     @CreatedDate
     private LocalDateTime createdAt;
 
@@ -57,7 +59,7 @@ public class Accommodation {
 
     @Builder
     public Accommodation(Address address, User user, String name, String description,
-        Long pricePerNight, Integer maxGuests, List<Image> images) {
+        Long pricePerNight, Integer maxGuests, List<Image> images, List<Amenity> amenities) {
         this.address = address;
         setUser(user);
         this.name = name;
@@ -65,6 +67,7 @@ public class Accommodation {
         this.pricePerNight = pricePerNight;
         this.maxGuests = maxGuests;
         addImages(images);
+        this.amenities = amenities;
     }
 
     private void addImages(List<Image> images) {
@@ -97,6 +100,10 @@ public class Accommodation {
             return null;
         }
         return images.get(0);
+    }
+
+    public void addAmenity(Amenity amenity) {
+        this.amenities.add(amenity);
     }
 
     @Override

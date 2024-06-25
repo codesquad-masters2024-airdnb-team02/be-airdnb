@@ -1,6 +1,8 @@
 package com.example.airdnb.dto.accommodation.search;
 
 import com.example.airdnb.domain.accommodation.Accommodation;
+import com.example.airdnb.domain.accommodation.Amenity;
+import java.util.List;
 
 /**
  *
@@ -20,7 +22,8 @@ public record AccommodationResponse(
         String representativeImageUrl,
         ReviewSummaryResponse review,
         Long pricePerNight,
-        Integer maxGuests) {
+        Integer maxGuests,
+        List<Amenity> amenities) {
 
     public static AccommodationResponse of(Accommodation accommodation, ReviewSummaryResponse review) {
 
@@ -34,7 +37,8 @@ public record AccommodationResponse(
                 imageUrl,
                 review,
                 accommodation.getPricePerNight(),
-                accommodation.getMaxGuests()
+                accommodation.getMaxGuests(),
+                accommodation.getAmenities()
         );
     }
 }
