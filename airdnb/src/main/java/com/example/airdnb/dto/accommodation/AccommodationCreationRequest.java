@@ -2,6 +2,7 @@ package com.example.airdnb.dto.accommodation;
 
 import com.example.airdnb.domain.accommodation.Accommodation;
 import com.example.airdnb.domain.accommodation.Address;
+import com.example.airdnb.domain.accommodation.Amenity;
 import com.example.airdnb.domain.accommodation.Image;
 import com.example.airdnb.domain.user.User;
 import java.util.List;
@@ -17,11 +18,15 @@ public record AccommodationCreationRequest(
         String description,
         Long pricePerNight,
         Integer maxGuests,
-        Set<String> imageUrls) {
+        Set<String> imageUrls,
+        List<String > amenities) {
 
     public Accommodation toEntityWithHost(User host) {
         Address address = buildAddress();
+
         List<Image> images = getImagesFromRequest();
+
+        List<Amenity> amenities = getAmenitiesFromRequest();
 
         return Accommodation.builder()
                 .address(address)
@@ -31,6 +36,7 @@ public record AccommodationCreationRequest(
                 .description(description)
                 .maxGuests(maxGuests)
                 .images(images)
+                .amenities(amenities)
                 .build();
     }
 
@@ -56,6 +62,12 @@ public record AccommodationCreationRequest(
     private List<Image> getImagesFromRequest() {
         return this.imageUrls().stream()
                 .map(Image::new)
+                .toList();
+    }
+
+    private List<Amenity> getAmenitiesFromRequest() {
+        return this.amenities.stream()
+                .map(Amenity::from)
                 .toList();
     }
 }
