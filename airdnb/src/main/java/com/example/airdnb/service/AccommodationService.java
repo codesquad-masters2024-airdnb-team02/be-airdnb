@@ -56,6 +56,11 @@ public class AccommodationService {
                 .orElseThrow(() -> new UserNotFoundException(id));
     }
 
+    private Accommodation findAccommodationById(Long accommodationId) {
+        return accommodationRepository.findById(accommodationId)
+                .orElseThrow(() -> new AccommodationNotFoundException(accommodationId));
+    }
+
     private ReviewSummaryResponse createReviewSummaryOfAccommodation(Long accommodationId) {
         List<Review> reviews = reviewRepository.findAllByAccommodationId(accommodationId);
 
