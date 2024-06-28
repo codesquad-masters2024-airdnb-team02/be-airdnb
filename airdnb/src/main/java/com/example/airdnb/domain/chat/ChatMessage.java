@@ -11,9 +11,7 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document(collection = "chatMessages")
 @Getter
 @ToString
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -26,8 +24,6 @@ public class ChatMessage {
 
     private String sender;
 
-    private String receiver;
-
     @Enumerated(EnumType.STRING)
     private MessageType type;
 
@@ -35,10 +31,9 @@ public class ChatMessage {
     private LocalDateTime createdAt;
 
     @Builder
-    public ChatMessage(String message, String sender, String receiver, MessageType type) {
+    public ChatMessage(String message, String sender, MessageType type) {
         this.message = message;
         this.sender = sender;
-        this.receiver = receiver;
         this.type = type;
     }
 
