@@ -1,7 +1,7 @@
 package com.example.airdnb.config;
 
 import com.example.airdnb.domain.user.User;
-import com.example.airdnb.repository.UserRepository;
+import com.example.airdnb.repository.jpa.UserRepository;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;

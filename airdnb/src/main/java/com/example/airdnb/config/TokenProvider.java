@@ -45,6 +45,7 @@ public class TokenProvider {
             .expiration(new Date(new Date().getTime() + expirationTime))
             .subject(user.getEmail())
             .claim("id", user.getId())
+            .claim("name", user.getName())
             .claim("role", user.getKey())
             .signWith(key)
             .compact();
@@ -69,8 +70,7 @@ public class TokenProvider {
         Set<GrantedAuthority> authorities = Collections.singleton(
             new SimpleGrantedAuthority((String) claims.get("role")));
 
-        return new UsernamePasswordAuthenticationToken(
-            userDetails, token, authorities);
+        return new UsernamePasswordAuthenticationToken(userDetails, token, authorities);
     }
 
     public String getUsername(String token) {

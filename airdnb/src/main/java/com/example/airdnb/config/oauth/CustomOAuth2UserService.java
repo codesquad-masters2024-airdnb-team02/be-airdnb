@@ -2,7 +2,7 @@ package com.example.airdnb.config.oauth;
 
 import com.example.airdnb.domain.user.Role;
 import com.example.airdnb.domain.user.User;
-import com.example.airdnb.repository.UserRepository;
+import com.example.airdnb.repository.jpa.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;

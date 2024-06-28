@@ -6,7 +6,7 @@ import com.example.airdnb.dto.user.LoginRequest;
 import com.example.airdnb.dto.user.LoginResponse;
 import com.example.airdnb.dto.user.UserCreateRequest;
 import com.example.airdnb.dto.user.UserResponse;
-import com.example.airdnb.repository.UserRepository;
+import com.example.airdnb.repository.jpa.UserRepository;
 import java.util.NoSuchElementException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -34,7 +34,7 @@ public class UserService {
         return savedUser.getId();
     }
 
-    public UserResponse findById(Long userId) {
+    public UserResponse findUserResponseById(Long userId) {
         User user = userRepository.findById(userId).orElseThrow(NoSuchElementException::new);
         return UserResponse.fromUser(user);
     }
@@ -51,5 +51,13 @@ public class UserService {
 
     public User findByEmail(String email) {
         return userRepository.findByEmail(email).orElseThrow(NoSuchElementException::new);
+    }
+
+    public User findById(Long id) {
+        return userRepository.findById(id).orElseThrow(NoSuchElementException::new);
+    }
+
+    public User findByName(String userName) {
+        return userRepository.findByName(userName).orElseThrow(NoSuchElementException::new);
     }
 }

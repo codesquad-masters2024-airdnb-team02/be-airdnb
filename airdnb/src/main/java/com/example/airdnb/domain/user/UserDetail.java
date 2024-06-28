@@ -32,4 +32,8 @@ public class UserDetail implements UserDetails {
         return user.getEmail();
     }
 
+    public String getName() {
+        return user.getName();
+    }
+
 }
