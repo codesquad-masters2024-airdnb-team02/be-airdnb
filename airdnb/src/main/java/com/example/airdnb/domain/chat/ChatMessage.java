@@ -24,6 +24,8 @@ public class ChatMessage {
 
     private String sender;
 
+    private String receiver;
+
     @Enumerated(EnumType.STRING)
     private MessageType type;
 
@@ -31,15 +33,16 @@ public class ChatMessage {
     private LocalDateTime createdAt;
 
     @Builder
-    public ChatMessage(String message, String sender, MessageType type) {
+    public ChatMessage(String message, String sender, MessageType type, String receiver) {
         this.message = message;
         this.sender = sender;
         this.type = type;
+        this.receiver = receiver;
     }
 
     public enum MessageType {
         CHAT,
         JOIN,
-        LEAVE;
+        LEAVE
     }
 }
