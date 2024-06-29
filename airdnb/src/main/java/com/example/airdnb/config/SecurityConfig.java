@@ -40,7 +40,7 @@ public class SecurityConfig {
             .headers(headers -> headers
                 .frameOptions(FrameOptionsConfig::sameOrigin))
             .authorizeHttpRequests(authorize -> authorize
-                .requestMatchers("/", "/login", "/users/**", "/h2-console/**").permitAll()
+                .requestMatchers("/", "/login", "/users","/users/login", "/h2-console/**", "/ws/**").permitAll()
                 .anyRequest().authenticated()
             )
             .sessionManagement(session -> session

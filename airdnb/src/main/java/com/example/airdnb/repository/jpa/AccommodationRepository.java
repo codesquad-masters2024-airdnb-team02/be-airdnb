@@ -1,4 +1,4 @@
-package com.example.airdnb.repository;
+package com.example.airdnb.repository.jpa;
 
 import com.example.airdnb.domain.accommodation.Accommodation;
 import org.springframework.data.jpa.repository.JpaRepository;
